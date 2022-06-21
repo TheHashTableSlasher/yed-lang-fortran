@@ -53,12 +53,17 @@ void maybe_change_ft(yed_buffer *buff) {
 
     /* TODO: use gperf here? check if that's faster/if that even matters */
     if (strcmp(ext, "f") == 0 || 
-        strcmp(ext, "F") == 0 ||
         strcmp(ext, "for") == 0 ||
         strcmp(ext, "ftn") == 0 ||
         strcmp(ext, "f90") == 0 ||
         strcmp(ext, "f95") == 0 ||
-        strcmp(ext, "f03") == 0) {
+        strcmp(ext, "f03") == 0 || 
+        strcmp(ext, "F") == 0 || /* Capitalized variants are preprocessed by C preprocessor */
+        strcmp(ext, "FOR") == 0 ||
+        strcmp(ext, "FTN") == 0 ||
+        strcmp(ext, "F90") == 0 ||
+        strcmp(ext, "F95") == 0 ||
+        strcmp(ext, "F03") == 0) {
         yed_buffer_set_ft(buff, yed_get_ft("Fortran"));
     }
 } 
