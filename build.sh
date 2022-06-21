@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-gcc -o c.so c.c $(yed --print-cflags) $(yed --print-ldflags)
+gcc -o fortran.so fortran.c $(yed --print-cflags) $(yed --print-ldflags)
