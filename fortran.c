@@ -14,8 +14,8 @@ int yed_plugin_boot(yed_plugin *self) {
 LOG_FN_ENTER();
     yed_plugin_set_unload_fn(self, unload);
 
-    if (yed_plugin_make_ft(self, "C") == FT_ERR_TAKEN) {
-        yed_cerr("lang/c: unable to create file type name");
+    if (yed_plugin_make_ft(self, "Fortran") == FT_ERR_TAKEN) {
+        yed_cerr("lang/fortran: unable to create file type name");
         LOG_EXIT();
         return 1;
     }
@@ -51,10 +51,17 @@ void maybe_change_ft(yed_buffer *buff) {
         return;
     }
 
-    if (strcmp(ext, "c") == 0 || strcmp(ext, "h") == 0) {
-        yed_buffer_set_ft(buff, yed_get_ft("C"));
+    /* TODO: use gperf here? check if that's faster/if that even matters */
+    if (strcmp(ext, "f") == 0 || 
+        strcmp(ext, "F") == 0 ||
+        strcmp(ext, "for") == 0 ||
+        strcmp(ext, "ftn") == 0 ||
+        strcmp(ext, "f90") == 0 ||
+        strcmp(ext, "f95") == 0 ||
+        strcmp(ext, "f03") == 0) {
+        yed_buffer_set_ft(buff, yed_get_ft("Fortran"));
     }
-}
+} 
 
 void maybe_change_ft_event(yed_event *event) {
     if (event->buffer) {
